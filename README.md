@@ -1,6 +1,6 @@
 # triptych
 
-A Prolog realisation of the system poem from https://bergholt.net/sun.
+A Prolog (here also read pro-logos) realisation of the system poem from https://bergholt.net/sun.
 
 The generator produces 72 variants of the poem:  
 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72  
