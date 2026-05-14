@@ -20,6 +20,4 @@ Prolog was chosen because its architecture mirrors the structuralist logic of th
 
 The project requires 72 permutations mapped onto the Saros 126 cycle. Prolog’s built-in backtracking engine handles this natively, exhaustively exploring the ten-word grid to realize every possible variant. 
 
-Furthermore, its roots in Natural Language Processing allow for precise control over syntactic orders and deictic anchoring. 
-
-Through unification, Prolog doesn't just display text; it mathematically maps linguistic output to cosmological recurrence. By using Prolog, the code becomes a literal extension of the poem’s philosophy—a rule-governed instrument where logic, syntax, and temporal scales are inextricably linked.
+Furthermore, its roots in Natural Language Processing allow for precise control over syntactic orders and deictic anchoring.
