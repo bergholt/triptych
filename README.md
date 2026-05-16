@@ -1,6 +1,6 @@
 # triptych
 
-A Prolog (or read *pro-logos*) realisation of the system poem from [bergholt.net/sun](https://bergholt.net/sun).
+A Prolog (or read *pro-logos*) realisation of a system poem.
 
 The generator produces 72 variants of the poem:
 
