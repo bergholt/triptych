@@ -14,7 +14,9 @@ One variant for each eclipse in Saros 126 (1179–2459).
 
 ## Why Prolog
 
-Prolog was chosen because its architecture mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, Prolog is declarative: it defines the linguistic system's constraints rather than the steps to execute them. This serves Hjelmslev's glossematics directly, where meaning emerges from the formal relations between elements.
+Prolog was chosen because its architecture mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, Prolog is declarative: it defines the linguistic system's constraints rather than the steps to execute them. 
+
+This serves Hjelmslev's glossematics directly, where meaning emerges from the formal relations between elements.
 
 The project requires 72 permutations. Prolog's built-in backtracking engine handles this natively, exhaustively exploring the ten-word grid to realize every variant. Its roots in computational linguistics allow for precise control over syntactic order and deictic anchoring.
 
