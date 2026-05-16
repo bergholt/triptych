@@ -20,7 +20,7 @@ The project requires 72 permutations. Prolog's built-in backtracking engine hand
 
 ## Usage
 
-Requires [SWI-Prolog](https://www.swi-prolog.org/).
+Requires SWI-Prolog.
 
 ```bash
 swipl sun.pl
