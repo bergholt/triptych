@@ -25,7 +25,7 @@ The project requires 72 permutations. Prolog's built-in backtracking engine hand
 Requires SWI-Prolog.
 
 ```bash
-swipl sun.pl
+swipl saros.pl
 ```
 
 Output:
