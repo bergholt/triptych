@@ -10,8 +10,8 @@
 % --- Paradigm: noun ---
 
 noun(apertures).
-noun(auguries).
 noun(apparitions).
+noun(auguries).
 
 % --- Paradigm: verb ---
 
