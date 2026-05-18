@@ -18,7 +18,7 @@ formal index of poetic manifestation.
 ========================================================================
 */
 
-% sun_glossematic_onecompiler.pl
+% sun.pl
 % Sun: 72 Poems for the Solar Eclipse
 % Kasper Bergholt, 2026
 %
