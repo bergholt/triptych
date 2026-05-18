@@ -1,6 +1,6 @@
 /*
 ========================================================================
-THE GLOSSEMATIC SUN
+SUN
 ========================================================================
 
 This program constructs a precise crossroads between programming,
