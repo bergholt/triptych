@@ -1,5 +1,5 @@
 % =====================================================================
-% Sun -- A Prolog Realization
+% Sun| A Prolog Realization
 % 3 nouns x 3 verbs x 4 adverbs x 2 syntactic orders = 72
 % One variant for each eclipse in Saros 126 (1179-2459).
 %
