@@ -22,7 +22,7 @@ formal index of poetic manifestation.
 % Sun: 72 Poems for the Solar Eclipse
 % Kasper Bergholt, 2026
 %
-% OneCompiler / GNU Prolog compatible version.
+% OneCompiler / GNU Prolog compatible version
 
 % ============================================================
 % I. GLOSSEMATIC INVENTORY
