@@ -54,6 +54,10 @@ Output:
 
 The number is not chosen. It is the cycle.
 
+## Inspiration
+
+*Sun* is structurally isomorphic to the Antikythera mechanism — the bronze, hand-cranked calculator (c. 2nd century BCE) whose spiral dial carried one glyph for each eclipse it could predict across the Saros cycle. The poem keeps that gesture and drops the bronze: one variant per eclipse of Saros 126. Where the mechanism was bound to a longitude, its predictions true only from one stretch of the Mediterranean, the grid is placeless — anchored not by geography but by the single deictic *now*.
+
 ## Further reading
 
 For the full essay on heteroglossia, chronotopes, and glossematics, see [bergholt.net/glossary](https://bergholt.net/glossary).
