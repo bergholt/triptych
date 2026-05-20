@@ -20,9 +20,9 @@ Beneath its signs sit *figurae*, a small closed inventory of elements that recom
 
 ## Why Prolog
 
-Prolog mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, it is *declarative*: it states the constraints of a system rather than the steps to execute it. Its primitive is the relation — the *predicate* — exactly as Hjelmslev's primitive is the *function*, the dependence between elements. 
+Prolog mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, it is *declarative*: it states the constraints of a system rather than the steps to execute it. Its primitive is the relation, the *predicate*, exactly as Hjelmslev's primitive is the *function*, the dependence between elements. 
 
-In both, the relation comes first; the terms are defined by the positions they occupy within it.åexhaustively enumerating every admissible combination of the grid. The poems are therefore not *written* one by one — they are *proved*, each a logical consequence of the paradigmatic axes. 
+In both, the relation comes first; the terms are defined by the positions they occupy within it.åexhaustively enumerating every admissible combination of the grid. The poems are therefore not *written* one by one, they are *proved*, each a logical consequence of the paradigmatic axes. 
 
 The language's own roots are in computational linguistics: Prolog was built in Alain Colmerauer's Marseille group around 1972, out of work on parsing natural language, which is the source of its precise control over syntactic order and deictic anchoring.
 
@@ -54,9 +54,9 @@ Output:
 
 ## Inspiration
 
-**The Antikythera mechanism** — the bronze, hand-cranked calculator (c. 2nd century BCE) whose spiral dial carried one glyph for each eclipse it could predict across the Saros cycle. *Sun* keeps the gesture and drops the bronze: one variant per eclipse of Saros 126. Where the mechanism was bound to a longitude, the grid is placeless, anchored only by the deictic *now*.
+**The Antikythera mechanism** — the bronze, hand-cranked calculator (c. 2nd century BCE) whose spiral dial carried one glyph for each eclipse it could predict across the Saros cycle. *Sun* keeps the gesture but drops the bronze: one variant per eclipse of Saros 126. Where the mechanism was bound to a longitude, the grid is placeless, anchored only by the deictic *now*.
 
-**Howard Russell Butler's eclipse triptych** (1918 Baker, Oregon; 1923 Lompoc, California; 1925 Middletown, Connecticut) — three oil paintings of total solar eclipses, recorded in rapid shorthand during the few minutes of totality and reconstructed for the Hayden Planetarium. 
+**Howard Russell Butler's eclipse triptych** (1918 Baker, Oregon; 1923 Lompoc, California; 1925 Middletown, Connecticut): three oil paintings of total solar eclipses, recorded in rapid shorthand during the few minutes of totality and reconstructed for the Hayden Planetarium. 
 
 Butler's three-panel form, and his treatment of the corona as at once a scientific record and an aesthetic object, is the precedent for the triptych: three videos, three nouns, one transient event encoded for later realization.
 
