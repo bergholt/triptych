@@ -10,13 +10,21 @@ One variant for each solar eclipse in Saros 126 (1179–2459).
 
 ## About
 
-*Sun* treats language as a combinatory machine in the Hjelmslevian sense of glossematics: meaning emerges not from words in isolation but from finite elements permuted through fixed constraints. A ten-word grid — three nouns, three verbs, four adverbs, the last being the deictic *now* — generates seventy-two variants, structurally mapped onto the seventy-two eclipses of Saros 126.
+*Sun* treats language as a combinatory machine in the Hjelmslevian sense of glossematics: meaning emerges not from words in isolation but from finite elements permuted through fixed constraints. 
 
-For Louis Hjelmslev, a language is pure *form*: a network of relations laid over an unformed *substance*, and articulated across two planes — *expression* (the signifier side) and *content* (the signified side). Beneath its signs sit *figurae*, a small closed inventory of elements that recombine under rule to yield an unbounded output. *Sun* takes this literally. Ten words are the inventory, the grid is the rule, and the seventy-two poems are what the system contains.
+A ten-word grid, three nouns, three verbs, four adverbs, the last being the deictic *now*, generates seventy-two variants, structurally mapped onto the seventy-two eclipses of Saros 126.
+
+For Louis Hjelmslev, a language is pure *form*: a network of relations laid over an unformed *substance*, and articulated across two planes: *expression* (the signifier side) and *content* (the signified side). 
+
+Beneath its signs sit *figurae*, a small closed inventory of elements that recombine under rule to yield an unbounded output. *Sun* takes this literally. Ten words are the inventory, the grid is the rule, and the seventy-two poems are what the system contains.
 
 ## Why Prolog
 
-Prolog mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, it is *declarative*: it states the constraints of a system rather than the steps to execute it. Its primitive is the relation — the *predicate* — exactly as Hjelmslev's primitive is the *function*, the dependence between elements. In both, the relation comes first; the terms are defined by the positions they occupy within it.åexhaustively enumerating every admissible combination of the grid. The poems are therefore not *written* one by one — they are *proved*, each a logical consequence of the paradigmatic axes. The language's own roots are in computational linguistics: Prolog was built in Alain Colmerauer's Marseille group around 1972, out of work on parsing natural language, which is the source of its precise control over syntactic order and deictic anchoring.
+Prolog mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, it is *declarative*: it states the constraints of a system rather than the steps to execute it. Its primitive is the relation — the *predicate* — exactly as Hjelmslev's primitive is the *function*, the dependence between elements. 
+
+In both, the relation comes first; the terms are defined by the positions they occupy within it.åexhaustively enumerating every admissible combination of the grid. The poems are therefore not *written* one by one — they are *proved*, each a logical consequence of the paradigmatic axes. 
+
+The language's own roots are in computational linguistics: Prolog was built in Alain Colmerauer's Marseille group around 1972, out of work on parsing natural language, which is the source of its precise control over syntactic order and deictic anchoring.
 
 ## Usage
 
