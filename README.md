@@ -52,11 +52,13 @@ Output:
 - 72 lines of code
 - 72 outputs when run
 
-The number is not chosen. It is the cycle.
-
 ## Inspiration
 
-*Sun* is structurally isomorphic to the Antikythera mechanism — the bronze, hand-cranked calculator (c. 2nd century BCE) whose spiral dial carried one glyph for each eclipse it could predict across the Saros cycle. The poem keeps that gesture and drops the bronze: one variant per eclipse of Saros 126. Where the mechanism was bound to a longitude, its predictions true only from one stretch of the Mediterranean, the grid is placeless — anchored not by geography but by the single deictic *now*.
+**The Antikythera mechanism** — the bronze, hand-cranked calculator (c. 2nd century BCE) whose spiral dial carried one glyph for each eclipse it could predict across the Saros cycle. *Sun* keeps the gesture and drops the bronze: one variant per eclipse of Saros 126. Where the mechanism was bound to a longitude, the grid is placeless, anchored only by the deictic *now*.
+
+**Howard Russell Butler's eclipse triptych** (1918 Baker, Oregon; 1923 Lompoc, California; 1925 Middletown, Connecticut) — three oil paintings of total solar eclipses, recorded in rapid shorthand during the few minutes of totality and reconstructed for the Hayden Planetarium. 
+
+Butler's three-panel form, and his treatment of the corona as at once a scientific record and an aesthetic object, is the precedent for the triptych: three videos, three nouns, one transient event encoded for later realization.
 
 ## Further reading
 
