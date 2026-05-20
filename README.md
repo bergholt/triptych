@@ -37,7 +37,11 @@ Output:
 - 72 outputs when run
 ## Inspiration
 **The Antikythera mechanism** — a hand-cranked bronze calculator from around the 2nd century BCE. One of its dials was a spiral marked with the eclipses it could predict across the Saros cycle, a single glyph for each. *Sun* keeps that gesture, one mark per eclipse, but nothing of the machine itself: no bronze, no gears, no fixed longitude to read it from. A grid needs no place to stand. The only thing locating these poems is the *now* at the close of each line.
-**Howard Russell Butler's eclipse triptych** — three oil paintings of total eclipses (Baker, Oregon, 1918; Lompoc, California, 1923; Middletown, Connecticut, 1925). Butler worked from shorthand notes scribbled during the few minutes of totality, then rebuilt the full canvases afterward for the Hayden Planetarium. His three-panel form is the model for the triptych here, and so is the double life he gave each painting: a piece of scientific record that is also a thing made to be looked at. Three videos, three nouns, one brief event written down to be built later.
+
+**Howard Russell Butler's eclipse triptych** — three oil paintings of total eclipses (Baker, Oregon, 1918; Lompoc, California, 1923; Middletown, Connecticut, 1925). Butler worked from shorthand notes scribbled during the few minutes of totality, then rebuilt the full canvases afterward for the Hayden Planetarium. 
+
+His three-panel form is the model for the triptych here, and so is the double life he gave each painting: a piece of scientific record that is also a thing made to be looked at. Three videos, three nouns, one brief event written down to be built later.
+
 ## Further reading
 For the full essay on heteroglossia, chronotopes, and glossematics, see [bergholt.net/glossary](https://bergholt.net/glossary).
 ## License
