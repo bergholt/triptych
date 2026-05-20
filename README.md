@@ -7,14 +7,15 @@ The generator produces 72 variants of the poem:
 
 One variant for each solar eclipse in Saros 126 (1179–2459).
 ## About
-*Sun* treats language as a combinatory machine in the Hjelmslevian sense of glossematics: meaning emerges not from words in isolation but from finite elements permuted through fixed constraints. 
-A ten-word grid, three nouns, three verbs, four adverbs, the last being the deictic *now*, generates seventy-two variants, structurally mapped onto the seventy-two eclipses of Saros 126.
-For Louis Hjelmslev, a language is pure *form*: a network of relations laid over an unformed *substance*, and articulated across two planes: *expression* (the signifier side) and *content* (the signified side). 
-Beneath its signs sit *figurae*, a small closed inventory of elements that recombine under rule to yield an unbounded output. *Sun* takes this literally. Ten words are the inventory, the grid is the rule, and the seventy-two poems are what the system contains.
+*Sun* is built on glossematics, the theory of language Louis Hjelmslev worked out in the 1940s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
+
+In *Sun* the figurae are ten words: three nouns, three verbs, four adverbs, the last of them the deictic *now*. The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126. Seventy-two is the entire vocabulary of the thing. There is no seventy-third.
 ## Why Prolog
-Prolog mirrors the structuralist logic of the combinatory machine. Unlike procedural languages, it is *declarative*: it states the constraints of a system rather than the steps to execute it. Its primitive is the relation, the *predicate*, exactly as Hjelmslev's primitive is the *function*, the dependence between elements. 
-In both, the relation comes first; the terms are defined by the positions they occupy within it. The program proceeds by exhaustively enumerating every admissible combination of the grid. The poems are therefore not *written* one by one, they are *proved*, each a logical consequence of the paradigmatic axes. 
-The language's own roots are in computational linguistics: Prolog was built in Alain Colmerauer's Marseille group around 1972, out of work on parsing natural language, which is the source of its precise control over syntactic order and deictic anchoring.
+Prolog suits this better than a procedural language would. You don't give it steps to run; you state the constraints and let it find whatever satisfies them. Its one building block is the relation, the *predicate*, which is also where Hjelmslev begins: his primitive unit is the *function*, the dependency between two terms, and the terms are only ever what the relation needs them to be. Relation first, contents second, in both systems.
+
+So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are what the system proves. They are closer to theorems than to anything a person sat down and wrote.
+
+Prolog has the right ancestry for it, too. It came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order and the placing of *now* as exactly as it does.
 ## Usage
 Requires SWI-Prolog.
 ```bash
@@ -35,9 +36,8 @@ Output:
 - 72 lines of code
 - 72 outputs when run
 ## Inspiration
-**The Antikythera mechanism** — the bronze, hand-cranked calculator (c. 2nd century BCE) whose spiral dial carried one glyph for each eclipse it could predict across the Saros cycle. *Sun* keeps the gesture but drops the bronze: one variant per eclipse of Saros 126. Where the mechanism was bound to a longitude, the grid is placeless, anchored only by the deictic *now*.
-**Howard Russell Butler's eclipse triptych** (1918 Baker, Oregon; 1923 Lompoc, California; 1925 Middletown, Connecticut): three oil paintings of total solar eclipses, recorded in rapid shorthand during the few minutes of totality and reconstructed for the Hayden Planetarium. 
-Butler's three-panel form, and his treatment of the corona as at once a scientific record and an aesthetic object, is the precedent for the triptych: three videos, three nouns, one transient event encoded for later realization.
+**The Antikythera mechanism** — a hand-cranked bronze calculator from around the 2nd century BCE. One of its dials was a spiral marked with the eclipses it could predict across the Saros cycle, a single glyph for each. *Sun* keeps that gesture, one mark per eclipse, but nothing of the machine itself: no bronze, no gears, no fixed longitude to read it from. A grid needs no place to stand. The only thing locating these poems is the *now* at the close of each line.
+**Howard Russell Butler's eclipse triptych** — three oil paintings of total eclipses (Baker, Oregon, 1918; Lompoc, California, 1923; Middletown, Connecticut, 1925). Butler worked from shorthand notes scribbled during the few minutes of totality, then rebuilt the full canvases afterward for the Hayden Planetarium. His three-panel form is the model for the triptych here, and so is the double life he gave each painting: a piece of scientific record that is also a thing made to be looked at. Three videos, three nouns, one brief event written down to be built later.
 ## Further reading
 For the full essay on heteroglossia, chronotopes, and glossematics, see [bergholt.net/glossary](https://bergholt.net/glossary).
 ## License
