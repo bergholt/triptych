@@ -1,4 +1,4 @@
-# triptych
+# Triptych
 
 A Prolog (or *pro-logos*) realisation of a system poem.
 
