@@ -8,8 +8,6 @@ The generator produces 72 variants of the poem:
 
 One variant for each solar eclipse in Saros 126 (1179–2459).
 
-![Sun Grid Layout](sun-grid.png)
-
 ## About
 
 *Sun* treats language as a combinatory machine in the Hjelmslevian sense of glossematics: meaning emerges not from words in isolation but from finite elements permuted through fixed constraints. 
