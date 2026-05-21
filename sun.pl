@@ -3,14 +3,16 @@
 SUN
 ========================================================================
 
-This program constructs a precise crossroads between programming,
-astronomy, and structural linguistics. Grounded in Louis Hjelmslev's
-glossematics, it treats Prolog itself as a semiotic apparatus: predicates
-define an expression-plane of linguistic invariants, while Saros Series 126
-provides a content-plane of historical solar eclipses.
+This program exists in the intersection of  programming,
+astronomy, and structural linguistics. 
+
+Grounded in Louis Hjelmslev's glossematics, it treats Prolog itself as a semiotic 
+apparatus: predicates define an expression-plane of linguistic invariants, while S
+aros Series 126 provides a content-plane of historical solar eclipses.
 
 The seventy-two poems are not written one by one, but inferred from a
 closed combinatorial system of nouns, verbs, adverbs, and syntactic orders.
+
 Through ordinal identity, each manifestation is coupled to one eclipse.
 The result is a literate, generative matrix in which code, poem, and archive
 coincide: language becomes queryable structure, and astronomy becomes a
