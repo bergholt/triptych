@@ -58,6 +58,8 @@ MIT License. Feel free to use for your own projects.
 > It is thus impossible to have a text without a language lying behind it. On the other hand, one can have a language without a text constructed in that language.
 >
 > This means that the language in question is foreseen by linguistic theory as a possible system, but that no process belonging to it is present as realised. The textual process is *virtual*.
+--
+> We must, therefore, register the relation between expression-correlation and content-correlation for all entities of the text in both planes. The distinctive factor is seen to be relevant for all inventorying. A correlation in one plane, which in this way has relation to a correlation in the other plane of a language, we shall call a commutation. This is a practical definition; in the theory, we seek, to be sure, a more abstract and more general formulation. Just as we can imagine a correlation and an exchange within a paradigm that have relation to a corresponding correlation and to a corresponding exchange within a paradigm in the other plane of a language, so also we can imagine a relation and a shift within a chain that have relation to a corresponding relation and to a corresponding shift within a chain in the other plane of a language; in such a case we shall speak of a permutation. A permutation is frequently found between signs of relatively large extension; and it is even possible to define words as minimal permutable signs. As a common term for commutation and permutation we choose mutation.
 >
 > — Louis Hjelmslev, *Prolegomena to a Theory of Language*, 1961 (*Omkring sprogteoriens grundlæggelse*, 1943)
 
