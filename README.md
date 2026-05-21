@@ -35,6 +35,8 @@ Output:
 - 72 variants of the poem
 - 72 lines of code
 - 72 outputs when run
+- '72 the year Prolog was released
+
 ## Inspiration
 **The Antikythera mechanism** — a hand-cranked bronze calculator from around the 2nd century BCE. One of its dials was a spiral marked with the eclipses it could predict across the Saros cycle, a single glyph for each. *Sun* keeps that gesture, one mark per eclipse, but nothing of the machine itself: no bronze, no gears, no fixed longitude to read it from. A grid needs no place to stand. The only thing locating these poems is the *now* at the close of each line.
 
