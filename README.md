@@ -61,7 +61,8 @@ MIT License. Feel free to use for your own projects.
 ---
 
 > We must, therefore, register the relation between expression-correlation and content-correlation for all entities of the text in both planes. The distinctive factor is seen to be relevant for all inventorying. A correlation in one plane, which in this way has relation to a correlation in the other plane of a language, we shall call a commutation. This is a practical definition; in the theory, we seek, to be sure, a more abstract and more general formulation. Just as we can imagine a correlation and an exchange within a paradigm that have relation to a corresponding correlation and to a corresponding exchange within a paradigm in the other plane of a language, so also we can imagine a relation and a shift within a chain that have relation to a corresponding relation and to a corresponding shift within a chain in the other plane of a language; in such a case we shall speak of a permutation. A permutation is frequently found between signs of relatively large extension; and it is even possible to define words as minimal permutable signs. As a common term for commutation and permutation we choose mutation.
-> — Louis Hjelmslev, *Prolegomena to a Theory of Language*, 1961 (*Omkring sprogteoriens grundlæggelse*, 1943), p. 75
+>
+> (Hjelmslev 75)
 
 > Now, as we have already seen (pp. 9–10), process and system are concepts of great generality, which cannot be restricted exclusively to semiotic objects. We find convenient and traditional special designations for a semiotic process and a semiotic system respectively in the names *syntagmatic* and *paradigmatic*. When it is a question of language (in the ordinary sense of the word), which indeed alone interests us for the present, we can also use simpler designations: the process can here be called a *text*, and the system a *language*.
 >
@@ -70,7 +71,11 @@ MIT License. Feel free to use for your own projects.
 > It is thus impossible to have a text without a language lying behind it. On the other hand, one can have a language without a text constructed in that language.
 >
 > This means that the language in question is foreseen by linguistic theory as a possible system, but that no process belonging to it is present as realised. The textual process is *virtual*.
-> — Louis Hjelmslev, *Prolegomena to a Theory of Language*, 1961 (*Omkring sprogteoriens grundlæggelse*, 1943)
+>
+> (Hjelmslev 10)
+
+## Works Cited
+Hjelmslev, Louis. *Prolegomena to a Theory of Language*. Translated by Francis J. Whitfield, U of Wisconsin P, 1961. Originally published as *Omkring sprogteoriens grundlæggelse*, *Festskrift udgivet af Københavns Universitet i anledning af Universitetets Aarsfest*, Nov. 1943, pp. 3–113; also published separately by Ejnar Munksgaard, Copenhagen, 1943.
 
 --
 
