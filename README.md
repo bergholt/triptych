@@ -69,4 +69,4 @@ Hjelmslev, Louis. *Prolegomena to a Theory of Language*. Translated by Francis J
 
 --
 
-Copenhagen, May, 2026
+copenhagen | may | 2026 | kasper bergholt
