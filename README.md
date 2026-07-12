@@ -11,6 +11,7 @@ One variant for each solar eclipse in Saros 126 (1179–2459).
 *Sun* is built on glossematics, the theory of language Louis Hjelmslev worked out in the 1940s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
 
 In *Sun* the figurae are ten words: three nouns, three verbs, four adverbs, the last of them the deictic *now*. The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126. Seventy-two is the entire vocabulary of the thing. There is no seventy-third.
+
 ## Why Prolog
 Prolog suits this better than a procedural language would. You don't give it steps to run; you state the constraints and let it find whatever satisfies them. Its one building block is the relation, the *predicate*, which is also where Hjelmslev begins: his primitive unit is the *function*, the dependency between two terms, and the terms are only ever what the relation needs them to be. Relation first, contents second, in both systems.
 So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are what the system proves. They are closer to theorems than to anything a person sat down and wrote.
@@ -52,10 +53,12 @@ Output:
 His three-panel form is the model for the triptych here, and so is the double life he gave each painting: a piece of scientific record that is also a thing made to be looked at. Three videos, three nouns, one brief event written down to be built later.
 
 ## Further reading
-For the full essay on glossematics, heteroglossia and the system poetry geneaology see [bergholt.net/glossary](https://bergholt.net/glossary).
+For the full essay on glossematics, heteroglossia and the system poetry geneaology see [bergholt.net/glossary](https://bergholt.net/sun).
 
 ## License
 MIT License. Feel free to use for your own projects.
+
+## Background
 We must, therefore, register the relation between expression-correlation and content-correlation for all entities of the text in both planes. The distinctive factor is seen to be relevant for all inventorying. A correlation in one plane, which in this way has relation to a correlation in the other plane of a language, we shall call a commutation. This is a practical definition; in the theory, we seek, to be sure, a more abstract and more general formulation. Just as we can imagine a correlation and an exchange within a paradigm that have relation to a corresponding correlation and to a corresponding exchange within a paradigm in the other plane of a language, so also we can imagine a relation and a shift within a chain that have relation to a corresponding relation and to a corresponding shift within a chain in the other plane of a language; in such a case we shall speak of a permutation. A permutation is frequently found between signs of relatively large extension; and it is even possible to define words as minimal permutable signs. As a common term for commutation and permutation we choose mutation.
 > (Hjelmslev 75)
 
@@ -64,9 +67,7 @@ We must, therefore, register the relation between expression-correlation and con
 > It is thus impossible to have a text without a language lying behind it. On the other hand, one can have a language without a text constructed in that language.
 > This means that the language in question is foreseen by linguistic theory as a possible system, but that no process belonging to it is present as realised. The textual process is *virtual*.
 > (Hjelmslev 39)
-
 ## Works Cited
-
 Hjelmslev, Louis. *Prolegomena to a Theory of Language*. Translated by Francis J. Whitfield, U of Wisconsin P, 1961. Originally published as *Omkring sprogteoriens grundlæggelse*, *Festskrift udgivet af Københavns Universitet i anledning af Universitetets Aarsfest*, Nov. 1943, pp. 3–113; also published separately by Ejnar Munksgaard, Copenhagen, 1943.
 --
 *copenhagen | may | 2026 | kasper bergholt*
