@@ -19,7 +19,6 @@ Prolog has the right ancestry for it, too. It came out of Alain Colmerauer's gro
 
 ## Usage
 Requires SWI-Prolog.
-
 ```bash
 swipl saros.pl
 ```
