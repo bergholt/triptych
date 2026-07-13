@@ -52,7 +52,7 @@ Output:
 His three-panel form is the model for the triptych here, and so is the double life he gave each painting: a piece of scientific record that is also a thing made to be looked at. Three videos, three nouns, one brief event written down to be built later.
 
 ## Further reading
-For the full essay on glossematics, heteroglossia and the system poetry geneaology see [bergholt.net/glossary](https://bergholt.net/sun).
+For the full essay on glossematics, heteroglossia and the system poetry geneaology see [bergholt.net/sun](https://bergholt.net/sun).
 
 ## License
 MIT License. Feel free to use for your own projects.
