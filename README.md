@@ -7,6 +7,8 @@ The generator produces 72 variants of the poem:
 
 One variant for each solar eclipse in Saros 126 (1179–2459).
 
+Saros.pl is the canonical, minimal version of the work: a 72-line Prolog program generating the complete sequence. sun.pl is an expanded implementation that makes the underlying linguistic and conceptual structure more explicit.
+
 ## About
 *Sun* is built on glossematics, the theory of language Louis Hjelmslev worked out in the 1940s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
 
