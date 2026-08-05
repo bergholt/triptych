@@ -14,8 +14,7 @@ In *Sun* the figurae are ten words: three nouns, three verbs, four adverbs, the 
 
 ## Why Prolog
 Prolog suits this better than a procedural language would. You don't give it steps to run; you state the constraints and let it find whatever satisfies them. Its one building block is the relation, the *predicate*, which is also where Hjelmslev begins: his primitive unit is the *function*, the dependency between two terms, and the terms are only ever what the relation needs them to be. Relation first, contents second, in both systems.
-So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are what the system proves. They are closer to theorems than to anything a person sat down and wrote.
-Prolog has the right ancestry for it, too. It came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order and the placing of *now* as exactly as it does.
+So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are what the system proves. Prolog has the right ancestry for it, too. It came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order exactly as it does.
 
 ## Usage
 Requires SWI-Prolog.
