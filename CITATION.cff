@@ -2,14 +2,20 @@ cff-version: 1.2.0
 message: "If you refer to this work, please cite it as below."
 title: "triptych: a Prolog realisation of Sun, a system poem"
 abstract: >-
-  A Prolog realisation of the system poem Sun. A ten-word grid of nouns,
-  verbs, adverbs and the deictic now generates seventy-two variants
-  through fixed combinatory constraints — three nouns by three verbs by
-  four adverbs by two syntactic orders. The seventy-two variants are
-  mapped onto the seventy-two eclipses of Saros 126 (1179–2459). The
-  language is chosen for its declarative architecture, which states the
-  constraints of the system rather than the steps to execute them, after
-  the glossematics of Louis Hjelmslev.
+  A Prolog realisation of the system poem Sun. A ten-word grid — three
+  nouns, three verbs, four adverbs — permuted across two syntactic orders
+  yields seventy-two variants, one for each eclipse of Saros 126
+  (1179–2459). The 2026 eclipse is the forty-eighth of that cycle.
+  Prolog is chosen for its declarative architecture, which states the
+  constraints of a system rather than the steps to execute them, after
+  the glossematics of Louis Hjelmslev. Nine of the ten words are
+  referentially autonomous; the tenth, now, is deictic, and its meaning
+  is constituted at the moment of utterance. It occurs in eighteen of
+  the seventy-two variants, dividing the grid at exactly one quarter of
+  its outputs into the readable-from-anywhere and the
+  readable-only-from-here. The work is structurally isomorphic to the
+  Antikythera Mechanism, built from words rather than bronze, and
+  deliberately placeless where that machine was bound to a longitude.
 type: software
 version: 1.0.0
 date-released: 2026-08-12
@@ -30,5 +36,20 @@ keywords:
   - combinatory poetics
   - glossematics
   - structuralism
+  - deixis
   - saros
   - solar eclipse
+references:
+  - type: book
+    title: "Omkring sprogteoriens grundlæggelse"
+    authors:
+      - family-names: Hjelmslev
+        given-names: Louis
+    year: 1943
+    publisher:
+      name: "Ejnar Munksgaard"
+    notes: >-
+      Translated as Prolegomena to a Theory of Language (1953). The
+      foundational text of glossematics, the Copenhagen school of
+      structural linguistics, and the source of the two P-headings
+      of Sun: Permutation and Prolegomena.
