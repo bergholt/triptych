@@ -10,23 +10,21 @@ The generator produces 72 variants of the poem:
 
 One variant for each solar eclipse in Saros 126 (1179–2459).
 
-`saros.pl` is the canonical, minimal version of the work: a 72-line Prolog program generating the complete sequence. `sun.pl` is an expanded implementation that makes the underlying linguistic and conceptual structure more explicit.
+`saros.pl` is a minimal version of the work consisting of a 72-line Prolog program that generaes all 72 variants of the poem-structure. `sun.pl` is an expanded implementation that makes the underlying linguistic and conceptual structure explicit.
 
 ## About
 
-*Sun* is built on glossematics, the theory of language Louis Hjelmslev worked out in the 1940s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
+*Sun* is built on glossematics, the theory of language the Danish Linguist Louis Hjelmslev worked out in the 1930s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
 
-In *Sun* the figurae are ten words: three nouns, three verbs, four adverbs, the last of them the deictic *now*. The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126. Seventy-two is the entire vocabulary of the thing. There is no seventy-third.
+In *Sun* the figurae are ten words: three nouns, three verbs, four adverbs, the last of them the deictic *now*. The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126.
 
 ## Why Prolog
 
 Prolog suits this better than a procedural language would. You don't give it steps to run; you state the constraints and let it find whatever satisfies them. Its one building block is the relation, the *predicate*, which is also where Hjelmslev begins: his primitive unit is the *function*, the dependency between two terms, and the terms are only ever what the relation needs them to be. Relation first, contents second, in both systems.
 
-So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are what the system proves. Prolog has the right ancestry for it, too. It came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order exactly as it does.
+So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are the program's ooutput. Prolog has the right ancestry for it, too, I think, as it came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order exactly as it does.
 
 ## Usage
-
-Requires [SWI-Prolog](https://www.swi-prolog.org).
 
 ```bash
 swipl saros.pl
@@ -51,14 +49,6 @@ Output:
 - 72 outputs when run
 - '72, the year Prolog appeared
 - The Danish original, *Omkring sprogteoriens grundlæggelse*, uses the word 'sproget' 172 times
-
-## Inspiration
-
-**The Antikythera mechanism** — a hand-cranked bronze calculator from around the 2nd century BCE. One of its dials was a spiral marked with the eclipses it could predict across the Saros cycle, a single glyph for each. *Sun* keeps that gesture, one mark per eclipse, but nothing of the machine itself: no bronze, no gears, no fixed longitude to read it from. A grid needs no place to stand. The only thing locating these poems is the *now* at the close of each line.
-
-**Howard Russell Butler's eclipse triptych** — three oil paintings of total eclipses (Baker, Oregon, 1918; Lompoc, California, 1923; Middletown, Connecticut, 1925). Butler worked from shorthand notes scribbled during the few minutes of totality, then rebuilt the full canvases afterwards for the Hayden Planetarium.
-
-His three-panel form is the model for the triptych here, and so is the double life he gave each painting: a piece of scientific record that is also a thing made to be looked at. Three videos, three nouns, one brief event written down to be built later.
 
 ## Further reading
 
