@@ -14,7 +14,7 @@ One variant for each solar eclipse in Saros 126 (1179–2459).
 
 ## About
 
-*Sun* is built on glossematics, the theory of language the Danish Linguist Louis Hjelmslev worked out in the 1930s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
+*Sun* is inspired by glossematics, the theory of language the Danish Linguist Louis Hjelmslev worked out in the 1930s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
 
 In *Sun* the figurae are ten words: three nouns, three verbs, four adverbs, the last of them the deictic *now*. The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126.
 
