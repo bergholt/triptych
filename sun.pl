@@ -1,28 +1,13 @@
 /*
 ========================================================================
+========================================================================
 SUN
 ========================================================================
-
-This program exists in the intersection of  programming,
-astronomy, and structural linguistics. 
-
-Grounded in Louis Hjelmslev's glossematics, it treats Prolog itself as a semiotic 
-apparatus: predicates define an expression-plane of linguistic invariants, while S
-aros Series 126 provides a content-plane of historical solar eclipses.
-
-The seventy-two poems are not written one by one, but inferred from a
-closed combinatorial system of nouns, verbs, adverbs, and syntactic orders.
-
-Through ordinal identity, each manifestation is coupled to one eclipse.
-The result is a literate, generative matrix in which code, poem, and archive
-coincide: language becomes queryable structure, and astronomy becomes a
-formal index of poetic manifestation.
 ========================================================================
 */
 
 % sun.pl
-% Sun: 72 Poems for the Solar Eclipse
-% Kasper Bergholt, 2026
+% Sun: 72 Poems for the Solar Eclipse of August 12th 2026
 %
 % OneCompiler / GNU Prolog compatible version
 
