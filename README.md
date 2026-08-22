@@ -10,7 +10,7 @@ The generator produces 72 variants of the poem:
 
 One variant for each solar eclipse in Saros 126 (1179–2459).
 
-`saros.pl` is a minimal version of the work consisting of a 72-line Prolog program that generaes all 72 variants of the poem-structure. `sun.pl` is an expanded implementation that makes the underlying linguistic and conceptual structure explicit.
+`saros.pl` is a minimal version of the work consisting of a 72-line Prolog program that generates all 72 variants of the poem-structure. `sun.pl` is an expanded implementation that makes the underlying linguistic and conceptual structure explicit.
 
 ## About
 
