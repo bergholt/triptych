@@ -82,4 +82,4 @@ MIT License. Feel free to use for your own projects.
 
 ---
 
-*copenhagen | may | 2026 | kasper bergholt*
+*copenhagen | may | 2026 | [kasper bergholt](https://github.com/bergholt)*
