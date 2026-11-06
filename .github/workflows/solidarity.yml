@@ -1,0 +1,25 @@
+name: Semiotic Solidarity
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  verify-invariants:
+    name: Verify Glossematic & Acoustic Invariants
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Archive
+        uses: actions/checkout@v4
+
+      - name: Install SWI-Prolog & GNU Prolog
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y swi-prolog-nox gprolog
+
+      - name: Run self_check (SWI-Prolog)
+        run: swipl -q -f sun.pl -g "self_check" -t halt
+
+      - name: Run self_check (GNU Prolog)
+        run: gprolog --consult-file sun.pl --query-goal self_check --entry-goal halt
