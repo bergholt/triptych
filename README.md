@@ -1,4 +1,4 @@
-# Triptych
+# Sun: 72 Triptychs for 72 Solar Eclipses
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21908151.svg)](https://doi.org/10.5281/zenodo.21908151)
 
