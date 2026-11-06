@@ -1,39 +1,45 @@
-*apertures align recursively / now, apparitions emerge*
-
 # Triptych
 
-A Prolog (or *pro-logos*) realisation of a system poem.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21908151.svg)](https://doi.org/10.5281/zenodo.21908151)
 
-The generator produces 72 variants of the poem:
+A Prolog (or *pro-logos*) realisation of a system poem. The generator produces 72 variants of the poem: 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72. One variant for each solar eclipse in Saros 126 (1179–2459).
 
-> 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72
-
-One variant for each solar eclipse in Saros 126 (1179–2459).
-
-`saros.pl` is a minimal version of the work consisting of a 72-line Prolog program that generates all 72 variants of the poem-structure. `sun.pl` is an expanded implementation that makes the underlying linguistic and conceptual structure explicit.
+* **`saros.pl`** is a minimal version of the work consisting of a 72-line Prolog program that generates all 72 variants of the poem-structure.
+* **`sun.pl`** is the expanded, self-verifying glossematic and acoustic implementation. It encodes the four Hjelmslevian strata, derives all category strides and Saros year-displacements from the inventory, models the 110 Hz (A2) overtone field, and verifies its own structural invariants (`self_check/0`) before printing any of five editions.
 
 ## About
 
-*Sun* is inspired by glossematics, the theory of language the Danish Linguist Louis Hjelmslev worked out in the 1930s. For Hjelmslev a language is *form* first of all, a web of relations laid across unshaped *substance*, and it runs on two planes at once: *expression* on the side of the signifier, *content* on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
+*Sun* is inspired by glossematics, the theory of language the Danish linguist Louis Hjelmslev worked out in the 1930s. For Hjelmslev a language is form first of all, a web of relations laid across unshaped substance, and it runs on two planes at once: expression on the side of the signifier, content on the side of the signified. Underneath the signs he places *figurae*, a small closed stock of sub-elements that recombine to make everything a language can say.
 
-*Sun* consists of  three nouns, three verbs, four adverbs, the last of which is the deictic *now*. 
-
-The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126.
+*Sun* consists of three nouns, three verbs, four adverbs, the last of which is the deictic *now*. The grid combines them and seventy-two variants fall out, one per eclipse of Saros 126.
 
 ## Why Prolog
 
-Prolog suits this better than a procedural language would. You don't give it steps to run; you state the constraints and let it find whatever satisfies them. Its one building block is the relation, the *predicate*, which is also where Hjelmslev begins: his primitive unit is the *function*, the dependency between two terms, and the terms are only ever what the relation needs them to be. Relation first, contents second, in both systems.
+Prolog suits this better than a procedural language would. You don't give it steps to run; you state the constraints and let it find whatever satisfies them. Its one building block is the relation, the predicate, which is also where Hjelmslev begins: his primitive unit is the function, the dependency between two terms, and the terms are only ever what the relation needs them to be. Relation first, contents second, in both systems. So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are the program's output.
 
-So the poems aren't composed one at a time. The program goes through the grid, turns up every combination the constraints permit, and the seventy-two that survive are the program's output. Prolog has the right ancestry for it, too, I think, as it came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order exactly as it does.
+Prolog has the right ancestry for it, too, as it came out of Alain Colmerauer's group in Marseille around 1972, from work on parsing natural language, which is why it handles word order exactly as it does.
+
+## Architecture of `sun.pl`
+
+Unlike a one-way string generator, `sun.pl` is bidirectional and relational. Everything numerical about the work—category strides, characteristic intervals across Saros 126, marked cell counts, and harmonic spectra—is derived from the inventory and verified at runtime by `self_check/0`:
+
+1. **Glossematic Strata:** Formalises `expression/form` (the $3 \times 3 \times 4 \times 2$ grid), `expression/substance` (the overtone field above A2 = 110 Hz), `content/form` (the 72 ordinal positions of Saros 126), and `content/substance` (the solar eclipse ephemeris from 1179 J to 2459).
+2. **Hjelmslevian Mutation (Commutation & Permutation):** Categories are distinguished not by part of speech, but by how far a mutation carries the reader through Saros 126:
+   * `adverb` — stride **1** (18 years)
+   * `verb` — stride **4** (72 years)
+   * `noun` — stride **12** (216 years)
+   * `order` (permutation) — stride **36** (649 years)
+3. **Etymological & Acoustic Solidarity (`fundamental_free = germanic`):** Under the work's sounding rule (each letter selects a partial of the 110 Hz A2 drone by alphabet position modulo 12), `recursively` touches partial 1 once (its final *y*, $25 \bmod 12 = 1$), while `thicken` never touches partial 1 at all (`t h i c k e n` = `8 8 9 3 11 5 2`). Consequently, the words that leave the fundamental drone ungrounded are **exclusively the two Germanic cells of the body** (`thicken` and `now`). Meanwhile, the letter `l` ($12 \bmod 12 = 0$) introduces an acoustic aperture (`silence`) exclusively inside the Latinate lexicon (`align`, `rhythmically`, `vertically`).
 
 ## Usage
+
+### Minimal version (`saros.pl`)
 
 ```bash
 swipl saros.pl
 ```
 
 Output:
-
 ```text
 1. apertures align rhythmically
 2. apertures align vertically
@@ -43,43 +49,59 @@ Output:
 72. now, apparitions emerge
 ```
 
+### Expanded version (`sun.pl`)
+
+Run the default Saros edition (runs `self_check` automatically first):
+
+```bash
+swipl -q -s sun.pl -t halt
+```
+
+Or print any of the five editions directly:
+
+```bash
+swipl -q -f sun.pl -g "self_check, print_manifestations" -t halt
+swipl -q -f sun.pl -g "self_check, print_saros_edition" -t halt
+swipl -q -f sun.pl -g "self_check, print_glossematic_edition" -t halt
+swipl -q -f sun.pl -g "self_check, print_mutation_edition" -t halt
+swipl -q -f sun.pl -g "self_check, print_sounding_edition" -t halt
+```
+
+### Interactive Queries
+
+Load `sun.pl` interactively (`swipl -f sun.pl`) or in [SWISH](https://swish.swi-prolog.org/) (removing the final `:- initialization(main).` line):
+
+```prolog
+?- poem(48, Text).
+Text = 'now, apertures emerge'.
+
+?- poem(N, 'now, apertures emerge').
+N = 48.
+
+?- commutation(noun, 48, N2, Old, New), saros_year(N2, Year).
+N2 = 60, Old = apertures, New = auguries,    Year = 2242 ;
+N2 = 72, Old = apertures, New = apparitions, Year = 2459.
+
+?- characteristic_interval(Category, Stride, Years).
+Category = noun,   Stride = 12, Years = 216 ;
+Category = verb,   Stride = 4,  Years = 72 ;
+Category = adverb, Stride = 1,  Years = 18 ;
+Category = order,  Stride = 36, Years = 649.
+
+?- fundamental_free(Word).
+Word = thicken ;
+Word = now.
+```
+
 ## Why 72
 
-- 72 eclipses in Saros 126 (1179–2459)
-- 72 variants of the poem
-- 72 lines of code
-- 72 outputs when run
-- '72, the year Prolog appeared
-- The Danish original, *Omkring sprogteoriens grundlæggelse*, uses the word 'sproget' 172 times
+* 72 eclipses in Saros 126 (1179–2459)
+* 72 variants of the poem
+* 72 lines of code in `saros.pl`
+* 72 outputs when run
+* '72, the year Prolog appeared
+* The Danish original, *Omkring sprogteoriens grundlæggelse*, uses the word *sproget* 172 times
 
 ## Further reading
 
-For the full essay on glossematics, heteroglossia and the system poetry genealogy, see [bergholt.net/sun](https://bergholt.net/sun).
-
-## Background
-
-> We must, therefore, register the relation between expression-correlation and content-correlation for all entities of the text in both planes. The distinctive factor is seen to be relevant for all inventorying. A correlation in one plane, which in this way has relation to a correlation in the other plane of a language, we shall call a commutation. This is a practical definition; in the theory, we seek, to be sure, a more abstract and more general formulation. Just as we can imagine a correlation and an exchange within a paradigm that have relation to a corresponding correlation and to a corresponding exchange within a paradigm in the other plane of a language, so also we can imagine a relation and a shift within a chain that have relation to a corresponding relation and to a corresponding shift within a chain in the other plane of a language; in such a case we shall speak of a permutation. A permutation is frequently found between signs of relatively large extension; and it is even possible to define words as minimal permutable signs. As a common term for commutation and permutation we choose mutation.
->
-> (Hjelmslev 75)
-
-> Now, as we have already seen (pp. 9–10), process and system are concepts of great generality, which cannot be restricted exclusively to semiotic objects. We find convenient and traditional special designations for a semiotic process and a semiotic system respectively in the names *syntagmatic* and *paradigmatic*. When it is a question of language (in the ordinary sense of the word), which indeed alone interests us for the present, we can also use simpler designations: the process can here be called a *text*, and the system a *language*.
->
-> A process and a system that belongs to it ("lies behind it") together contract a function, which, depending on the point of view, may be conceived as a relation or as a correlation. A closer investigation of this function soon shows us that it is a determination in which the system is the constant: the process determines the system. The decisive point is not the superficial relationship consisting in the fact that the process is the more immediately accessible for observation, while the system must be "ordered to" the process—"discovered" behind it by means of a procedure—and so is only mediately knowable insofar as it is not presented to us on the basis of a previously performed procedure. This superficial relationship might make it seem that the process can exist without a system but not vice versa. But the decisive point is that the existence of a system is a necessary premiss for the existence of a process: the process comes into existence by virtue of a system's being present behind it, a system which governs and determines it in its possible development. A process is unimaginable—because it would be in an absolute and irrevocable sense inexplicable—without a system lying behind it. On the other hand, a system is not unimaginable without a process; the existence of a system does not presuppose the existence of a process. The system does not come into existence by virtue of a process's being found.
->
-> It is thus impossible to have a text without a language lying behind it. On the other hand, one can have a language without a text constructed in that language.
->
-> This means that the language in question is foreseen by linguistic theory as a possible system, but that no process belonging to it is present as realised. The textual process is *virtual*.
->
-> (Hjelmslev 39)
-
-## Works Cited
-
-Hjelmslev, Louis. *Prolegomena to a Theory of Language*. Translated by Francis J. Whitfield, U of Wisconsin P, 1961. Originally published as *Omkring sprogteoriens grundlæggelse*, *Festskrift udgivet af Københavns Universitet i anledning af Universitetets Aarsfest*, Nov. 1943, pp. 3–113; also published separately by Ejnar Munksgaard, Copenhagen, 1943.
-
-## License
-
-MIT License. Feel free to use for your own projects.
-
----
-
-*copenhagen | may | 2026 | [kasper bergholt](https://github.com/bergholt)*
+For the full essay on glossematics, heteroglossia, and the system poetry genealogy, see [bergholt.net/sun](https://bergholt.net/sun).
