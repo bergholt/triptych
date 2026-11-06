@@ -1,0 +1,19 @@
+Nulle archive sans dehors.
+-- Jacques Derrida, Mal d'archive, Galilee, 1995, page 26
+--
+mutation: the chain held, one cell exchanged
+--
+noun    stride 12  interval 216 years
+verb    stride  4  interval  72 years
+adverb  stride  1  interval  18 years
+order   stride 36  interval 649 years
+--
+from 48. now, apertures emerge
+  commutation noun   -> 60. 22 Dec 2242    partial  gamma 1.2836  +216y  now, auguries emerge
+  commutation noun   -> 72.  3 May 2459    partial  gamma 1.5188  +433y  now, apparitions emerge
+  commutation verb   -> 40. 17 May 1882    total    gamma 0.3269  -144y  now, apertures align
+  commutation verb   -> 44. 30 Jun 1954    total    gamma 0.6135  -72y  now, apertures thicken
+  commutation adverb -> 45. 10 Jul 1972    total    gamma 0.6872  -54y  rhythmically, apertures emerge
+  commutation adverb -> 46. 22 Jul 1990    total    gamma 0.7597  -36y  vertically, apertures emerge
+  commutation adverb -> 47.  1 Aug 2008    total    gamma 0.8307  -18y  recursively, apertures emerge
+  permutation order  -> 12.  6 Jul 1377 J  annular  gamma -0.7168  -649y  apertures emerge now
