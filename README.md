@@ -1,6 +1,6 @@
 # Sun: 72 Triptychs for 72 Solar Eclipses
 
-<img width="500" alt="sun-triptychs-for-solar-eclipses-kasper-bergholt" src="https://github.com/user-attachments/assets/d5f51300-d8fd-4a69-b945-eee171bda986" />
+<img width="500" alt="Sun: Triptychs - 72 Poems for 72 Solar Eclipses - by Danish artist Kasper Bergholt" src="https://github.com/user-attachments/assets/d5f51300-d8fd-4a69-b945-eee171bda986" />
 
 A Prolog (or *pro-logos*) realisation of a system poem. The generator produces 72 variants of the poem: 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72. One variant for each solar eclipse in Saros 126 (1179–2459).
 
