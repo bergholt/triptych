@@ -93,6 +93,19 @@ Word = thicken ;
 Word = now.
 ```
 
+## Book
+
+*Sun: 72 Poems for 72 Solar Eclipses* is published in hardcover by Forlaget Akse in two editions, with different covers and a different order of contents. The first edition was published on 7 November 2026 (ISBN 9788797786772) and the second on 11 November 2026 (ISBN 9788740991338).
+
+| | First edition | Second edition |
+|---|---|---|
+| Published | 7 November 2026 | 11 November 2026 |
+| Pages | 84 | 86 |
+| Size | 12.5 × 19.6 cm | 15.5 × 23.5 cm |
+| ISBN | 9788797786772 | 9788740991338 |
+
+Each of the 72 variants has its own page, with its eclipse, its letters and its partials over an A2 drone, and the book prints the complete source code, so a reader holding the book holds the means of making its contents again. Akse is Danish for *axis*, the line an eclipse needs. The book's two editions are separate from the five editions that `sun.pl` prints.
+
 ## Why 72
 
 * 72 eclipses in Saros 126 (1179–2459)
@@ -100,6 +113,7 @@ Word = now.
 * 72 lines of code in `saros.pl`
 * 72 outputs when run
 * '72, the year Prolog appeared
+* The first edition's ISBN ends in 72; the second ends in 1338, which is 6 × 223, the number of lunar months in a saros
 * The Danish original, *Omkring sprogteoriens grundlæggelse*, uses the word *sproget* 172 times
 
 ## Further reading
