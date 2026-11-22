@@ -1,0 +1,858 @@
+# ========================================================================
+  SUN
+  ========================================================================
+
+  sun.a68
+  Sun: 72 Poems for the Solar Eclipse of August 12th 2026
+  After the glossematic and acoustic architecture of https://bergholt.net/sun
+  An ALGOL 68 realisation of sun.pl (github.com/bergholt/triptych, MIT
+  license), made from the ALGOL 60 version sun.alg.
+
+  ALGOL 68 Genie (a68g), upper stropping, no libraries. Tested with
+  a68g 2.8.4 and 3.1.2.
+
+  ONLINE : paste the whole file into JDoodle (Algol 68) and press Execute.
+  RUN    : a68g sun.a68
+  EDITION: set by the line  INT edition := saros  below, or on the command
+           line after --exit, as in  a68g sun.a68 --exit sounding
+           (manifestations, saros, glossematic, mutation, sounding).
+
+  From ALGOL 60 to ALGOL 68.
+    ALGOL 60 could print a string but never take one apart, so sun.alg
+    spells every word letter by letter, one procedure per letter. ALGOL 68
+    has strings that can be indexed, so here the words are written as
+    words again, and the letters (figurae, the small closed stock of
+    sub-elements a word is built from) are read out of them only where the
+    sounding rule needs them: alphabet position = ABS letter - ABS "a" + 1.
+
+    Everything else keeps the shape of sun.alg. A cell of the grid is a row
+    of four indices, one per category. The two directions of selection/5
+    are selection (an ordinal decoded through the strides) and encode (the
+    same strides multiplied back), and cells is the inventory enumerated in
+    the order Prolog finds the solutions. Where Prolog fails, these
+    procedures give an empty row or an empty string.
+
+    Nothing numerical is written into the generator. Cardinalities are the
+    bounds of the inventory rows, strides are multiplied from them,
+    intervals are read from the Saros table, spectra are counted from the
+    letters. The eleven checks of sun.pl's self_check then hold the derived
+    values to the numbers the work asserts, before anything is printed. A
+    failing check prints sun_check_failed(label) and stops.
+
+    Gamma is stored as an integer in ten-thousandths (-1.5356 is -15356),
+    the precision the Prolog table and printer use, so no real arithmetic
+    is involved.
+
+    The inventory order is part of the artwork: changing it changes eclipse
+    assignments. Astronomical data and the epigraph are retained from the
+    original, and the checks validate structure, not external accuracy.
+    ASCII output, and dates use the original Julian and Gregorian catalogue
+    convention.
+
+  Two findings the sounding rule yields that the essay does not state:
+    recursively touches partial 1 once (its final y, 25 mod 12), and
+    thicken never touches partial 1 at all (t h i c k e n = 8 8 9 3 11 5 2).
+    The words that leave the drone hanging are therefore exactly the two
+    Germanic cells. The sounding check asserts that equivalence. Under a
+    literal mod 12 the letter l (12) yields partial 0, printed as a silence.
+#
+
+# The edition printed #
+INT manifestations = 1, saros = 2, glossematic = 3, mutation = 4, sounding = 5;
+INT edition := saros;
+
+# ============================================================
+  I. GLOSSEMATIC INVENTORY
+  ============================================================ #
+
+# The categories, in the order sun.pl declares them #
+INT noun = 1, verb = 2, adverb = 3, order = 4;
+[]STRING category name = ("noun", "verb", "adverb", "order");
+[]INT lexical = (noun, verb, adverb);
+
+# Paradigmatic invariants: 3 x 3 x 4 = 36 commutable selections.
+  Syntagmatic invariants: 2 orders permute 36 to 72.
+  The position of each word in its row is its index, counted from 0. #
+[][]STRING inventory = (
+   ("apertures", "auguries", "apparitions"),
+   ("align", "thicken", "emerge"),
+   ("rhythmically", "vertically", "recursively", "now"),
+   ("suffix", "prefix"));
+
+PROC len = (STRING s) INT: UPB s - LWB s + 1;
+PROC cardinality = (INT cat) INT: UPB inventory[cat];
+PROC invariant = (INT cat, idx) STRING: inventory[cat][idx + 1];
+
+# The lexicon: word, register, reference, mode. Latinate covers Greek. #
+INT latinate = 1, germanic = 2;
+INT autonomous = 1, deictic = 2;
+INT event = 1, action = 2, manner = 3, tactile density = 4, temporal utterance = 5;
+MODE META = STRUCT (STRING word, INT register, reference, mode);
+[]META lexicon meta = (
+   ("apertures",    latinate, autonomous, event),
+   ("auguries",     latinate, autonomous, event),
+   ("apparitions",  latinate, autonomous, event),
+   ("align",        latinate, autonomous, action),
+   ("emerge",       latinate, autonomous, action),
+   ("rhythmically", latinate, autonomous, manner),
+   ("vertically",   latinate, autonomous, manner),
+   ("recursively",  latinate, autonomous, manner),
+   ("thicken",      germanic, autonomous, tactile density),
+   ("now",          germanic, deictic,    temporal utterance));
+
+# The entry of a word in the lexicon, or 0 #
+PROC meta of = (STRING w) INT:
+BEGIN
+   INT found := 0;
+   FOR ix TO UPB lexicon meta DO
+      IF word OF lexicon meta[ix] = w THEN found := ix FI
+   OD;
+   found
+END;
+
+# ============================================================
+  II. EXPRESSION-FORM: CARDINALITY AND STRIDE
+
+  The categories are not distinguished by part of speech. They are
+  distinguished by how far a commutation carries you through the cycle.
+  Stride: ordinals moved by one step within a category. Derived.
+  ============================================================ #
+
+PROC stride = (INT cat) INT:
+   IF cat = adverb THEN 1
+   ELIF cat = verb THEN cardinality (adverb)
+   ELIF cat = noun THEN cardinality (adverb) * cardinality (verb)
+   ELSE cardinality (adverb) * cardinality (verb) * cardinality (noun)
+   FI;
+
+PROC system cardinality = INT:
+BEGIN
+   INT product := 1;
+   FOR cat TO UPB inventory DO product *:= cardinality (cat) OD;
+   product
+END;
+
+# ============================================================
+  III. SELECTION (BOTH DIRECTIONS)
+
+  A cell is a row of four indices, in category order.
+  ============================================================ #
+
+MODE CELL = [1 : 4] INT;
+[]INT none = ();
+
+# A bound ordinal decodes directly. Outside the grid there is no cell. #
+PROC selection = (INT num) []INT:
+   IF num < 1 OR num > system cardinality THEN none
+   ELSE
+      INT k = num - 1;
+      INT oi = k OVER stride (order), r1 = k MOD stride (order);
+      INT ni = r1 OVER stride (noun), r2 = r1 MOD stride (noun);
+      INT vi = r2 OVER stride (verb), ai = r2 MOD stride (verb);
+      (ni, vi, ai, oi)
+   FI;
+
+# A cell encodes by the same strides, so the mapping cannot drift
+  between directions #
+PROC encode = ([]INT cell) INT:
+BEGIN
+   INT sum := 1;
+   FOR cat TO UPB cell DO sum +:= cell[cat] * stride (cat) OD;
+   sum
+END;
+
+# The word a cell selects in a category #
+PROC cell word = ([]INT cell, INT cat) STRING: invariant (cat, cell[cat]);
+
+# An unbound ordinal enumerates the inventory and encodes, in the order
+  Prolog would find the solutions: order, noun, verb, adverb #
+INT ncells = system cardinality;
+[1 : ncells] CELL cells;
+[1 : ncells] INT ordinals;
+BEGIN
+   INT count := 0;
+   FOR oi FROM 0 TO cardinality (order) - 1 DO
+   FOR ni FROM 0 TO cardinality (noun) - 1 DO
+   FOR vi FROM 0 TO cardinality (verb) - 1 DO
+   FOR ai FROM 0 TO cardinality (adverb) - 1 DO
+      count +:= 1;
+      cells[count] := (ni, vi, ai, oi);
+      ordinals[count] := encode (cells[count])
+   OD OD OD OD
+END;
+
+# ============================================================
+  IV. SYNTAGMATIC FUNCTION AND MANIFESTATION
+  ============================================================ #
+
+PROC syntagmatic function = ([]INT cell) STRING:
+BEGIN
+   STRING o = cell word (cell, order);
+   STRING n = cell word (cell, noun), v = cell word (cell, verb),
+          a = cell word (cell, adverb);
+   IF o = "suffix" THEN n + " " + v + " " + a
+   ELIF o = "prefix" THEN a + ", " + n + " " + v
+   ELSE ""
+   FI
+END;
+
+# The poem of an ordinal, or the empty string where there is none #
+PROC manifestation = (INT num) STRING:
+BEGIN
+   []INT cell = selection (num);
+   IF UPB cell = 0 THEN "" ELSE syntagmatic function (cell) FI
+END;
+
+PROC poem = (INT num) STRING: manifestation (num);
+
+PROC append = (REF FLEX [] INT row, INT x) VOID:
+BEGIN
+   INT n = UPB row;
+   [1 : n + 1] INT grown;
+   grown[1 : n] := row;
+   grown[n + 1] := x;
+   row := grown
+END;
+
+# poem(N, Text) with Text bound: the poem read back to its ordinal(s) #
+PROC poems of = (STRING text) []INT:
+BEGIN
+   FLEX [1 : 0] INT hits;
+   FOR ix TO ncells DO
+      IF syntagmatic function (cells[ix]) = text THEN append (hits, ordinals[ix]) FI
+   OD;
+   hits
+END;
+
+# ============================================================
+  V. CONTENT-FORM: SAROS 126 (1179 J - 2459)
+  ============================================================ #
+
+INT partial = 1, annular = 2, hybrid = 3, total = 4;
+[]STRING type name = ("partial", "annular", "hybrid", "total");
+
+# ordinal, year, month, day, type, gamma (ten-thousandths) #
+MODE ECLIPSE = STRUCT (INT ordinal, year, month, day, type, gamma);
+[]ECLIPSE saros table = (
+   ( 1, 1179,  3, 10, partial, -15356),
+   ( 2, 1197,  3, 20, partial, -14880),
+   ( 3, 1215,  3, 31, partial, -14344),
+   ( 4, 1233,  4, 11, partial, -13717),
+   ( 5, 1251,  4, 22, partial, -13041),
+   ( 6, 1269,  5,  2, partial, -12291),
+   ( 7, 1287,  5, 14, partial, -11500),
+   ( 8, 1305,  5, 24, partial, -10658),
+   ( 9, 1323,  6,  4, annular,  -9799),
+   (10, 1341,  6, 14, annular,  -8922),
+   (11, 1359,  6, 26, annular,  -8038),
+   (12, 1377,  7,  6, annular,  -7168),
+   (13, 1395,  7, 17, annular,  -6318),
+   (14, 1413,  7, 27, annular,  -5506),
+   (15, 1431,  8,  8, annular,  -4737),
+   (16, 1449,  8, 18, annular,  -4030),
+   (17, 1467,  8, 29, annular,  -3391),
+   (18, 1485,  9,  9, annular,  -2811),
+   (19, 1503,  9, 20, annular,  -2314),
+   (20, 1521,  9, 30, annular,  -1892),
+   (21, 1539, 10, 12, annular,  -1551),
+   (22, 1557, 10, 22, annular,  -1266),
+   (23, 1575, 11,  2, annular,  -1061),
+   (24, 1593, 11, 22, annular,   -906),
+   (25, 1611, 12,  4, annular,   -803),
+   (26, 1629, 12, 14, annular,   -725),
+   (27, 1647, 12, 26, annular,   -675),
+   (28, 1666,  1,  5, annular,   -624),
+   (29, 1684,  1, 16, annular,   -565),
+   (30, 1702,  1, 28, annular,   -484),
+   (31, 1720,  2,  8, annular,   -375),
+   (32, 1738,  2, 18, annular,   -211),
+   (33, 1756,  3,  1, annular,      6),
+   (34, 1774,  3, 12, annular,    284),
+   (35, 1792,  3, 22, annular,    618),
+   (36, 1810,  4,  4, annular,   1031),
+   (37, 1828,  4, 14, hybrid,    1498),
+   (38, 1846,  4, 25, hybrid,    2038),
+   (39, 1864,  5,  6, hybrid,    2622),
+   (40, 1882,  5, 17, total,     3269),
+   (41, 1900,  5, 28, total,     3943),
+   (42, 1918,  6,  8, total,     4658),
+   (43, 1936,  6, 19, total,     5389),
+   (44, 1954,  6, 30, total,     6135),
+   (45, 1972,  7, 10, total,     6872),
+   (46, 1990,  7, 22, total,     7597),
+   (47, 2008,  8,  1, total,     8307),
+   (48, 2026,  8, 12, total,     8977),
+   (49, 2044,  8, 23, total,     9613),
+   (50, 2062,  9,  3, partial,  10191),
+   (51, 2080,  9, 13, partial,  10723),
+   (52, 2098,  9, 25, partial,  11184),
+   (53, 2116, 10,  6, partial,  11589),
+   (54, 2134, 10, 17, partial,  11931),
+   (55, 2152, 10, 28, partial,  12213),
+   (56, 2170, 11,  8, partial,  12426),
+   (57, 2188, 11, 18, partial,  12591),
+   (58, 2206, 12,  1, partial,  12711),
+   (59, 2224, 12, 11, partial,  12791),
+   (60, 2242, 12, 22, partial,  12836),
+   (61, 2261,  1,  2, partial,  12873),
+   (62, 2279,  1, 13, partial,  12899),
+   (63, 2297,  1, 23, partial,  12940),
+   (64, 2315,  2,  5, partial,  12991),
+   (65, 2333,  2, 15, partial,  13087),
+   (66, 2351,  2, 27, partial,  13209),
+   (67, 2369,  3,  9, partial,  13392),
+   (68, 2387,  3, 20, partial,  13624),
+   (69, 2405,  3, 31, partial,  13928),
+   (70, 2423,  4, 11, partial,  14282),
+   (71, 2441,  4, 21, partial,  14706),
+   (72, 2459,  5,  3, partial,  15188));
+
+# The row of an ordinal in the table, or 0 #
+PROC saros row = (INT num) INT:
+BEGIN
+   INT found := 0;
+   FOR ix TO UPB saros table DO
+      IF ordinal OF saros table[ix] = num THEN found := ix FI
+   OD;
+   found
+END;
+
+PROC saros year = (INT num) INT: year OF saros table[saros row (num)];
+
+# ============================================================
+  VI-VII. SEMIOTIC FUNCTION, MUTATION
+  ============================================================ #
+
+# A mutation registers on the content plane as a signed displacement in
+  years through the Saros #
+PROC displacement = (INT n1, n2) INT: saros year (n2) - saros year (n1);
+
+# The characteristic interval of a category: the years one minimal step
+  through it carries the reader, from the series' first member #
+PROC interval = (INT cat) INT: displacement (1, 1 + stride (cat));
+
+# Hjelmslev (def. 54-56). Hold every category but one and exchange the
+  member of that one. Targets in ascending ordinal order. Cells are
+  compared by index, which is comparison by word because every paradigm
+  holds distinct words (the inventory check). #
+PROC exchanges = (INT cat, n1) []INT:
+BEGIN
+   FLEX [1 : 0] INT hits;
+   []INT c1 = selection (n1);
+   IF UPB c1 > 0 THEN
+      FOR ix TO ncells DO
+         BOOL held := TRUE;
+         FOR k TO UPB c1 DO
+            IF k /= cat AND cells[ix][k] /= c1[k] THEN held := FALSE FI
+         OD;
+         IF held AND cells[ix][cat] /= c1[cat] THEN append (hits, ordinals[ix]) FI
+      OD
+   FI;
+   hits
+END;
+
+# A commutation exchanges one member of one paradigm with the chain held,
+  and a permutation shifts the chain with the paradigms held. The moves of
+  a category are its commutations, or for order the permutation. #
+PROC moves = (INT cat, n1) []INT: exchanges (cat, n1);
+
+# ============================================================
+  VIII. MARKED CELLS: REGISTER, DEIXIS, BODY
+  ============================================================ #
+
+PROC cell is = (INT num, cat, STRING w) BOOL:
+BEGIN
+   []INT cell = selection (num);
+   IF UPB cell = 0 THEN FALSE ELSE cell word (cell, cat) = w FI
+END;
+
+# 18 require a present body, 54 can be read from anywhere #
+PROC is deictic = (INT num) BOOL: cell is (num, adverb, "now");
+PROC is autonomous = (INT num) BOOL:
+   UPB selection (num) > 0 ANDF NOT is deictic (num);
+# 24 import tactile density (Old English thiccian) #
+PROC is tactile = (INT num) BOOL: cell is (num, verb, "thicken");
+# 36 where the body breaks through measurement (24 + 18 - 6) #
+PROC is bodily break = (INT num) BOOL: is tactile (num) OR is deictic (num);
+# 6 where the two Germanic cells align #
+PROC is germanic alignment = (INT num) BOOL: is tactile (num) AND is deictic (num);
+
+# 12 August 2026: "now, apertures emerge" #
+INT anchor = 48;
+
+# ============================================================
+  IX. EXPRESSION-SUBSTANCE: THE OVERTONE FIELD ABOVE A2
+
+  Each letter selects a partial of the drone by alphabet position modulo
+  twelve, letters are weighted by recurrence within the word, and the line
+  is parsed noun, verb, adverb whatever its syntactic order.
+  ============================================================ #
+
+INT drone hz = 110;
+
+# The weight of each partial 0..11 in a word #
+PROC spectrum = (STRING w) [] INT:
+BEGIN
+   [0 : 11] INT weight;
+   FOR p FROM 0 TO 11 DO weight[p] := 0 OD;
+   FOR ix FROM LWB w TO UPB w DO
+      INT position = ABS w[ix] - ABS "a" + 1;
+      IF position >= 1 AND position <= 26 THEN weight[position MOD 12] +:= 1 FI
+   OD;
+   weight
+END;
+
+PROC partial weight = (STRING w, INT p) INT: (spectrum (w))[LWB spectrum (w) + p];
+PROC touches fundamental = (STRING w) BOOL: partial weight (w, 1) > 0;
+
+PROC spectrum size = (STRING w) INT:
+BEGIN
+   []INT weight = spectrum (w);
+   INT count := 0;
+   FOR ix FROM LWB weight TO UPB weight DO
+      IF weight[ix] > 0 THEN count +:= 1 FI
+   OD;
+   count
+END;
+
+# How many letters of a line sound the fundamental #
+PROC grounding = (INT num) INT:
+BEGIN
+   []INT cell = selection (num);
+   INT sum := 0;
+   FOR ix TO UPB lexical DO sum +:= partial weight (cell word (cell, lexical[ix]), 1) OD;
+   sum
+END;
+
+# ============================================================
+  X. FORMATTING
+  ============================================================ #
+
+PROC str = (INT n) STRING: whole (n, 0);
+PROC pad left = (STRING s, INT width) STRING:
+   IF width > len (s) THEN (width - len (s)) * " " + s ELSE s FI;
+PROC pad right = (STRING s, INT width) STRING:
+   IF width > len (s) THEN s + (width - len (s)) * " " ELSE s FI;
+
+# Gamma to four decimals, from the stored ten-thousandths #
+PROC gamma text = (INT g) STRING:
+BEGIN
+   INT mag = ABS g;
+   STRING frac := str (mag MOD 10000);
+   WHILE len (frac) < 4 DO frac := "0" + frac OD;
+   (g < 0 | "-" | "") + str (mag OVER 10000) + "." + frac
+END;
+
+[]STRING month name = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
+PROC before reform = (INT y, m, d) BOOL:
+   y < 1582 OR (y = 1582 AND (m < 10 OR (m = 10 AND d < 15)));
+
+# The date column of an eclipse row: "48. 12 Aug 2026    " #
+PROC date text = (ECLIPSE e) STRING:
+   pad left (str (ordinal OF e), 2) + ". " + pad left (str (day OF e), 2) + " "
+   + month name[month OF e] + " " + str (year OF e)
+   + (before reform (year OF e, month OF e, day OF e) | " J" | "  ") + "  ";
+
+PROC type text = (ECLIPSE e) STRING: pad right (type name[type OF e], 9);
+
+# "1 4 5x2 ...": partial 0 is a silence #
+PROC spectrum text = (STRING w) STRING:
+BEGIN
+   []INT weight = spectrum (w);
+   STRING out := "";
+   FOR p FROM 0 TO 11 DO
+      INT k = weight[LWB weight + p];
+      IF k > 0 THEN
+         IF out /= "" THEN out +:= " " FI;
+         out +:= (p = 0 | "silence" | str (p));
+         IF k > 1 THEN out +:= "x" + str (k) FI
+      FI
+   OD;
+   out
+END;
+
+PROC line = (STRING s) VOID: print ((s, newline));
+
+# ============================================================
+  XI. EDITIONS
+  ============================================================ #
+
+PROC epigraph = VOID:
+BEGIN
+   line ("Nulle archive sans dehors.");
+   line ("-- Jacques Derrida, Mal d'archive, Galilee, 1995, page 26");
+   line ("--")
+END;
+
+PROC manifestations edition = VOID:
+BEGIN
+   epigraph;
+   FOR ix TO ncells DO
+      STRING t = poem (ordinals[ix]);
+      IF t /= "" THEN line (str (ordinals[ix]) + ". " + t) FI
+   OD
+END;
+
+PROC saros edition = VOID:
+BEGIN
+   epigraph;
+   FOR row TO UPB saros table DO
+      ECLIPSE e = saros table[row];
+      STRING t = poem (ordinal OF e);
+      IF t /= "" THEN line (date text (e) + type text (e) + t) FI
+   OD
+END;
+
+PROC glossematic edition = VOID:
+BEGIN
+   epigraph;
+   line ("expression-form / content-form");
+   line ("--");
+   FOR row TO UPB saros table DO
+      ECLIPSE e = saros table[row];
+      STRING t = poem (ordinal OF e);
+      IF t /= "" THEN
+         []INT c = selection (ordinal OF e);
+         line (date text (e)
+            + "[" + cell word (c, order) + ": " + cell word (c, noun)
+            + " / " + cell word (c, verb) + " / " + cell word (c, adverb) + "]  "
+            + type text (e) + "gamma " + gamma text (gamma OF e) + "  ->  " + t)
+      FI
+   OD
+END;
+
+PROC mutation edition = VOID:
+BEGIN
+   epigraph;
+   line ("mutation: the chain held, one cell exchanged");
+   line ("--");
+   FOR cat TO UPB inventory DO
+      line (pad right (category name[cat], 8) + "stride " + pad left (str (stride (cat)), 2)
+         + "  interval " + pad left (str (interval (cat)), 3) + " years")
+   OD;
+   line ("--");
+   line ("from " + str (anchor) + ". " + poem (anchor));
+   # The commutations, noun, verb, adverb, then the permutation #
+   FOR cat TO UPB inventory DO
+      []INT targets = moves (cat, anchor);
+      FOR ix FROM LWB targets TO UPB targets DO
+         INT n2 = targets[ix];
+         ECLIPSE e = saros table[saros row (n2)];
+         INT years = displacement (anchor, n2);
+         line ("  " + (cat = order | "permutation " | "commutation ")
+            + pad right (category name[cat], 7) + "-> " + date text (e) + type text (e)
+            + "gamma " + gamma text (gamma OF e) + "  " + (years >= 0 | "+" | "")
+            + str (years) + "y  " + poem (n2))
+      OD
+   OD
+END;
+
+PROC sounding edition = VOID:
+BEGIN
+   epigraph;
+   line ("drone A2 " + str (drone hz) + " Hz; partial = alphabet position mod 12; noun, verb, adverb");
+   line ("--");
+   FOR ix TO UPB lexical DO
+      []STRING words = inventory[lexical[ix]];
+      FOR jx FROM LWB words TO UPB words DO
+         STRING w = words[jx];
+         line (pad right (w, 13) + spectrum text (w)
+            + (touches fundamental (w) | "" | "   [no fundamental]"))
+      OD
+   OD;
+   line ("--");
+   FOR ix TO ncells DO
+      STRING out := pad left (str (ordinals[ix]), 2) + ". "
+                  + pad left (str (grounding (ordinals[ix])), 2) + "  ";
+      FOR jx TO UPB lexical DO
+         STRING w = cell word (cells[ix], lexical[jx]);
+         out +:= (jx > 1 | " | " | "") + w + " " + spectrum text (w)
+      OD;
+      line (out)
+   OD
+END;
+
+# ============================================================
+  XII. EDITION CHECKS
+
+  The generator derives everything from the inventory, and these checks
+  hold the derived edition to the numbers this artwork asserts of itself.
+  ============================================================ #
+
+PROC count of = (PROC (INT) BOOL pred) INT:
+BEGIN
+   INT count := 0;
+   FOR ix TO ncells DO IF pred (ordinals[ix]) THEN count +:= 1 FI OD;
+   count
+END;
+
+PROC same ints = ([]INT x, y) BOOL:
+BEGIN
+   BOOL same := UPB x - LWB x = UPB y - LWB y;
+   IF same THEN
+      FOR ix FROM 0 TO UPB x - LWB x DO
+         IF x[LWB x + ix] /= y[LWB y + ix] THEN same := FALSE FI
+      OD
+   FI;
+   same
+END;
+
+PROC contains = ([]INT row, INT x) BOOL:
+BEGIN
+   BOOL found := FALSE;
+   FOR ix FROM LWB row TO UPB row DO IF row[ix] = x THEN found := TRUE FI OD;
+   found
+END;
+
+# Every paradigm holds distinct words, every lexicon entry is a word of
+  the grid, and every word of the grid has its lexicon entry #
+PROC inventory valid = BOOL:
+BEGIN
+   BOOL ok := TRUE;
+   FOR cat TO UPB inventory DO
+      []STRING words = inventory[cat];
+      FOR i1 FROM LWB words TO UPB words DO
+         FOR i2 FROM i1 + 1 TO UPB words DO
+            IF words[i1] = words[i2] THEN ok := FALSE FI
+         OD
+      OD
+   OD;
+   FOR ix TO UPB lexicon meta DO
+      BOOL found := FALSE;
+      FOR jx TO UPB lexical DO
+         []STRING words = inventory[lexical[jx]];
+         FOR kx FROM LWB words TO UPB words DO
+            IF words[kx] = word OF lexicon meta[ix] THEN found := TRUE FI
+         OD
+      OD;
+      IF NOT found THEN ok := FALSE FI
+   OD;
+   FOR jx TO UPB lexical DO
+      []STRING words = inventory[lexical[jx]];
+      FOR kx FROM LWB words TO UPB words DO
+         IF meta of (words[kx]) = 0 THEN ok := FALSE FI
+      OD
+   OD;
+   ok
+END;
+
+# The inventory is exactly the schema of the edition, word by word #
+PROC edition shape = BOOL:
+BEGIN
+   [][]STRING schema = (
+      ("apertures", "auguries", "apparitions"),
+      ("align", "thicken", "emerge"),
+      ("rhythmically", "vertically", "recursively", "now"),
+      ("suffix", "prefix"));
+   BOOL ok := UPB schema = UPB inventory;
+   IF ok THEN
+      FOR cat TO UPB schema DO
+         IF UPB schema[cat] /= UPB inventory[cat] THEN ok := FALSE
+         ELSE
+            FOR ix TO UPB schema[cat] DO
+               IF schema[cat][ix] /= inventory[cat][ix] THEN ok := FALSE FI
+            OD
+         FI
+      OD
+   FI;
+   ok
+END;
+
+PROC cardinality valid = BOOL: system cardinality = 72;
+
+# 72 poems, all different #
+PROC unique poems = BOOL:
+BEGIN
+   [1 : ncells] STRING texts;
+   BOOL ok := ncells = 72;
+   FOR ix TO ncells DO
+      texts[ix] := poem (ordinals[ix]);
+      IF texts[ix] = "" THEN ok := FALSE FI
+   OD;
+   FOR i1 TO ncells DO
+      FOR i2 FROM i1 + 1 TO ncells DO
+         IF texts[i1] = texts[i2] THEN ok := FALSE FI
+      OD
+   OD;
+   ok
+END;
+
+# The sorted ordinals of the Saros table are the ordinals of the grid #
+PROC eclipse coverage = BOOL:
+BEGIN
+   [1 : UPB saros table] INT sorted;
+   FOR ix TO UPB saros table DO sorted[ix] := ordinal OF saros table[ix] OD;
+   FOR i1 TO UPB sorted - 1 DO
+      FOR i2 FROM i1 + 1 TO UPB sorted DO
+         IF sorted[i2] < sorted[i1] THEN
+            INT held = sorted[i1];
+            sorted[i1] := sorted[i2];
+            sorted[i2] := held
+         FI
+      OD
+   OD;
+   same ints (sorted, ordinals)
+END;
+
+# Selection enumerates ordinals in ascending order and decodes each
+  ordinal to the same cell it was encoded from, and nothing else decodes #
+PROC selection valid = BOOL:
+BEGIN
+   BOOL ok := TRUE;
+   FOR ix TO ncells DO
+      IF ix > 1 THEN
+         IF ordinals[ix] <= ordinals[ix - 1] THEN ok := FALSE FI
+      FI;
+      IF NOT same ints (selection (ordinals[ix]), cells[ix]) THEN ok := FALSE FI;
+      IF encode (selection (ordinals[ix])) /= ordinals[ix] THEN ok := FALSE FI
+   OD;
+   ok AND UPB selection (0) = 0 AND UPB selection (73) = 0
+END;
+
+PROC marked counts = BOOL:
+   count of (is deictic) = 18 AND count of (is autonomous) = 54
+   AND count of ((INT n) BOOL: is deictic (n) AND cell is (n, order, "prefix")) = 9
+   AND count of ((INT n) BOOL: is deictic (n) AND cell is (n, order, "suffix")) = 9
+   AND count of (is tactile) = 24 AND count of (is germanic alignment) = 6
+   AND count of (is bodily break) = 36;
+
+PROC anchor valid = BOOL:
+BEGIN
+   INT row = saros row (anchor);
+   IF row = 0 THEN FALSE
+   ELSE
+      ECLIPSE e = saros table[row];
+      year OF e = 2026 AND month OF e = 8 AND day OF e = 12
+      AND type OF e = total AND gamma OF e = 8977
+      AND poem (anchor) = "now, apertures emerge"
+      AND same ints (poems of ("now, apertures emerge"), anchor)
+   FI
+END;
+
+PROC boundaries valid = BOOL:
+   poem (1) = "apertures align rhythmically"
+   AND poem (36) = "apparitions emerge now"
+   AND poem (37) = "rhythmically, apertures align"
+   AND poem (72) = "now, apparitions emerge";
+
+# The essay's intervals and its anchor commutation, derived not asserted #
+PROC mutation valid = BOOL:
+BEGIN
+   BOOL ok := stride (adverb) = 1 AND interval (adverb) = 18
+      AND stride (verb) = 4 AND interval (verb) = 72
+      AND stride (noun) = 12 AND interval (noun) = 216
+      AND stride (order) = 36 AND interval (order) = 649;
+   # The anchor's noun is apertures, and commuting it reaches 2242, 2459 #
+   IF cell word (selection (48), noun) /= "apertures" THEN ok := FALSE FI;
+   []INT nouns48 = moves (noun, 48);
+   IF NOT same ints (nouns48, (60, 72)) THEN ok := FALSE
+   ELIF saros year (60) /= 2242 OR saros year (72) /= 2459 THEN ok := FALSE
+   FI;
+   IF NOT same ints (moves (verb, 48), (40, 44)) THEN ok := FALSE FI;
+   IF NOT same ints (moves (adverb, 48), (45, 46, 47)) THEN ok := FALSE FI;
+   # permutation(48, 12, prefix, suffix), 649 years back #
+   IF NOT contains (moves (order, 48), 12) THEN ok := FALSE FI;
+   IF NOT cell is (48, order, "prefix") OR NOT cell is (12, order, "suffix")
+   THEN ok := FALSE FI;
+   IF displacement (48, 12) /= -649 THEN ok := FALSE FI;
+   # Every mutation registers on the content plane, and each commutation
+     is its own inverse #
+   FOR ix TO ncells DO
+      INT n1 = ordinals[ix];
+      FOR cat TO UPB inventory DO
+         []INT targets = moves (cat, n1);
+         FOR jx FROM LWB targets TO UPB targets DO
+            IF targets[jx] /= n1 AND displacement (n1, targets[jx]) = 0 THEN ok := FALSE FI;
+            IF cat /= order THEN
+               IF NOT contains (moves (cat, targets[jx]), n1) THEN ok := FALSE FI
+            FI
+         OD
+      OD
+   OD;
+   ok
+END;
+
+# The sounding claims that survive the literal rule, plus the two findings #
+PROC sounding valid = BOOL:
+BEGIN
+   BOOL ok := TRUE;
+   # The spectrum of now is exactly 2, 3, 11, once each #
+   []INT now weight = spectrum ("now");
+   FOR p FROM 0 TO 11 DO
+      IF now weight[LWB now weight + p] /= (p = 2 OR p = 3 OR p = 11 | 1 | 0)
+      THEN ok := FALSE FI
+   OD;
+   # The words without the fundamental are exactly the Germanic words, and
+     every noun opens on the fundamental #
+   FOR ix TO UPB lexical DO
+      []STRING words = inventory[lexical[ix]];
+      FOR jx FROM LWB words TO UPB words DO
+         STRING w = words[jx];
+         BOOL germanic word = register OF lexicon meta[meta of (w)] = germanic;
+         IF NOT touches fundamental (w) /= germanic word THEN ok := FALSE FI;
+         IF lexical[ix] = noun AND NOT touches fundamental (w) THEN ok := FALSE FI
+      OD
+   OD;
+   IF partial weight ("thicken", 8) /= 2 OR partial weight ("emerge", 5) /= 3
+      OR partial weight ("rhythmically", 1) /= 4 OR partial weight ("vertically", 1) /= 2
+      OR partial weight ("recursively", 1) /= 1 OR spectrum size ("align") /= 5
+   THEN ok := FALSE FI;
+   # No line is ungrounded. The least grounded lines are exactly ones where
+     both body cells sound, and the deictic lines are exactly those whose
+     adverb is unanchored. #
+   INT least := max int;
+   FOR ix TO ncells DO
+      INT g = grounding (ordinals[ix]);
+      IF g = 0 THEN ok := FALSE FI;
+      IF g < least THEN least := g FI
+   OD;
+   FOR ix TO ncells DO
+      INT n = ordinals[ix];
+      IF grounding (n) = least AND NOT is germanic alignment (n) THEN ok := FALSE FI;
+      IF is deictic (n) /= NOT touches fundamental (cell word (cells[ix], adverb))
+      THEN ok := FALSE FI
+   OD;
+   ok
+END;
+
+# Validate before printing, as sun.pl does #
+PROC check = (BOOL holds, STRING title) VOID:
+   IF NOT holds THEN
+      line ("sun_check_failed(" + title + ")");
+      stop
+   FI;
+
+check (inventory valid, "inventory");
+check (edition shape, "edition_order");
+check (cardinality valid, "cardinality");
+check (unique poems, "unique_poems");
+check (eclipse coverage, "eclipse_coverage");
+check (selection valid, "selection");
+check (marked counts, "marked_cells");
+check (anchor valid, "anchor");
+check (boundaries valid, "boundaries");
+check (mutation valid, "mutation");
+check (sounding valid, "sounding");
+
+# ============================================================
+  XIII. ENTRY POINT
+  ============================================================ #
+
+# An edition named on the command line, after --exit, overrides the one
+  set above #
+[]STRING edition names = ("manifestations", "saros", "glossematic", "mutation", "sounding");
+FOR ix TO argc DO
+   FOR jx TO UPB edition names DO
+      IF argv (ix) = edition names[jx] THEN edition := jx FI
+   OD
+OD;
+
+IF edition = manifestations THEN manifestations edition
+ELIF edition = saros THEN saros edition
+ELIF edition = glossematic THEN glossematic edition
+ELIF edition = mutation THEN mutation edition
+ELIF edition = sounding THEN sounding edition
+ELSE line ("edition: one of manifestations, saros, glossematic, mutation, sounding")
+FI
