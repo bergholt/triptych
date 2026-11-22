@@ -117,7 +117,3 @@ Each of the 72 variants has its own page, with its eclipse, its letters and its 
 * '72, the year Prolog appeared
 * The first edition's ISBN ends in 72; the second ends in 1338, which is 6 × 223, the number of lunar months in a saros
 * The Danish original, *Omkring sprogteoriens grundlæggelse*, uses the word *sproget* 172 times
-
-## Further reading
-
-For the full essay on glossematics, heteroglossia, and the system poetry genealogy, see [bergholt.net/sun](https://bergholt.net/sun).
