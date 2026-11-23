@@ -2,7 +2,10 @@
 
 [Danish](README.da.md)
 
-A Prolog (or *pro-logos*) realisation of a system poem. The generator produces 72 variants of the poem: 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72. One variant for each solar eclipse in Saros 126 (1179–2459).
+<img width="1800" height="1162" alt="Black-and-white photograph of a stack of five library books: four Prolog programming textbooks and a volume on Derrida and Joyce." src="https://github.com/user-attachments/assets/78d74140-4759-4759-8004-1ac03f17293e" />
+
+
+A Prolog realisation of a system poem. The generator produces 72 variants of the poem: 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72. One variant for each solar eclipse in Saros 126 (1179–2459).
 
 * **`saros.pl`** is a minimal version of the work consisting of a 72-line Prolog program that generates all 72 variants of the poem-structure.
 * **`sun.pl`** is the expanded, self-verifying glossematic and acoustic implementation. It encodes the four Hjelmslevian strata, derives all category strides and Saros year-displacements from the inventory, models the 110 Hz (A2) overtone field, and verifies its own structural invariants (`self_check/0`) before printing any of five editions.
