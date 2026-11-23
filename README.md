@@ -2,8 +2,7 @@
 
 [Danish](README.da.md)
 
-<img width="1800" height="1162" alt="Black-and-white photograph of a stack of five library books: four Prolog programming textbooks and a volume on Derrida and Joyce." src="https://github.com/user-attachments/assets/78d74140-4759-4759-8004-1ac03f17293e" />
-
+<img width="1800" height="1162" alt="Black-and-white photograph of a stack of five library books: four Prolog programming textbooks and a volume on Derrida and Joyce." src="https://github.com/user-attachments/assets/78d74140-ea2d-4759-8004-1ac03f17293e" />
 
 A Prolog realisation of a system poem. The generator produces 72 variants of the poem: 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72. One variant for each solar eclipse in Saros 126 (1179–2459).
 
