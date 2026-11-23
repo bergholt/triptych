@@ -2,8 +2,6 @@
 
 [Danish](README.da.md)
 
-<img width="6883" height="4443" alt="Stack_of_Prolog_programming_textbooks_and_Derrida_and_Joyce jpg" src="https://github.com/user-attachments/assets/70283acb-bdf8-4f4b-8a29-cfdab55490a2" />
-
 A Prolog (or *pro-logos*) realisation of a system poem. The generator produces 72 variants of the poem: 3 nouns × 3 verbs × 4 adverbs × 2 syntactic orders = 72. One variant for each solar eclipse in Saros 126 (1179–2459).
 
 * **`saros.pl`** is a minimal version of the work consisting of a 72-line Prolog program that generates all 72 variants of the poem-structure.
